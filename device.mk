@@ -142,13 +142,35 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 # ============================================================================
 # VENDOR BLOBS - Keymaster/Gatekeeper (FBE Decryption)
 # ============================================================================
+# Keymaster libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster4.so \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster4support.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster4support.so \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster_messages.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster_messages.so \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster_portable.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster_portable.so \
-    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libpuresoftkeymasterdevice.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libpuresoftkeymasterdevice.so \
-    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.gatekeeper@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libpuresoftkeymasterdevice.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libpuresoftkeymasterdevice.so
+
+# Keymaster attestation (MediaTek)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/vendor.mediatek.hardware.keymaster_attestation@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.mediatek.hardware.keymaster_attestation@1.0.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/vendor.mediatek.hardware.keymaster_attestation@1.1.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.mediatek.hardware.keymaster_attestation@1.1.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-impl.so
+
+# Gatekeeper HAL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.gatekeeper@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.gatekeeper@1.0-impl.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/gatekeeper.beanpod.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/gatekeeper.beanpod.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/kmsetkey.beanpod.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/kmsetkey.beanpod.so
+
+# Keymaster service (Beanpod - MediaTek TEE)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/bin/hw/android.hardware.keymaster@4.0-service.beanpod:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.keymaster@4.0-service.beanpod \
+    $(LOCAL_PATH)/vendor/infinix/x695c/bin/hw/android.hardware.gatekeeper@1.0-service:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.gatekeeper@1.0-service
+
+# Service RC files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/etc/init/android.hardware.keymaster@4.0-service.beanpod.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.keymaster@4.0-service.beanpod.rc \
+    $(LOCAL_PATH)/vendor/infinix/x695c/etc/init/android.hardware.gatekeeper@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gatekeeper@1.0-service.rc
 
 # ============================================================================
 # VENDOR BLOBS - HIDL/HwBinder (HAL Communication)

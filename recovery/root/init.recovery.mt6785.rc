@@ -1,11 +1,47 @@
+# Recovery init for Infinix X695C
+# FBE Decryption Support - MediaTek Beanpod Keymaster
+
 on early-init
     setprop ro.product.device Infinix-X695C
     setprop ro.product.model "Infinix X695C"
+    setprop ro.product.brand Infinix
 
 on init
     mkdir /mnt/vendor 0775 root system
     mkdir /metadata 0771 root system
+    mkdir /metadata/vold 0771 root system
+    mkdir /metadata/vold/metadata_encryption 0771 root system
+
+on post-fs
+    # Create directories for keymaster
+    mkdir /data/misc/keystore 0700 keystore keystore
+    mkdir /data/misc/keystore/user_0 0700 keystore keystore
 
 on boot
     setenforce 0
     start logd
+    
+    # Start keymaster HAL for FBE decryption
+    start vendor.keymaster-4-0-beanpod
+    start vendor.gatekeeper-1-0
+
+# Keymaster service (Beanpod - MediaTek TEE)
+service vendor.keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
+    class early_hal
+    user system
+    group system drmrpc
+    disabled
+    oneshot
+
+# Gatekeeper service
+service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
+    class hal
+    user system
+    group system
+    disabled
+    oneshot
+
+on property:twrp.crypto.ready=1
+    start vendor.keymaster-4-0-beanpod
+    start vendor.gatekeeper-1-0
