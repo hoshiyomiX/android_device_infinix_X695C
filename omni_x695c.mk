@@ -13,13 +13,13 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # ============================================================================
 # INHERIT FROM DEVICE
 # ============================================================================
-$(call inherit-product, device/infinix/X695C/device.mk)
+$(call inherit-product, device/infinix/x695c/device.mk)
 
 # ============================================================================
 # DEVICE IDENTIFIER
 # ============================================================================
-PRODUCT_DEVICE := X695C
-PRODUCT_NAME := omni_X695C
+PRODUCT_DEVICE := x695c
+PRODUCT_NAME := omni_x695c
 PRODUCT_BRAND := Infinix
 PRODUCT_MODEL := Infinix X695C
 PRODUCT_MANUFACTURER := INFINIX MOBILITY LIMITED

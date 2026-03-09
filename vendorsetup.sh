@@ -5,5 +5,5 @@
 #
 
 # Add the device to lunch menu
-add_lunch_combo omni_X695C-userdebug
-add_lunch_combo omni_X695C-eng
+add_lunch_combo omni_x695c-userdebug
+add_lunch_combo omni_x695c-eng

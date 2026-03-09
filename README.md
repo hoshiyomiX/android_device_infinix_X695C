@@ -1,13 +1,19 @@
-# Infinix X695C Recovery Tree (Minimal)
+# TWRP Device Tree for Infinix X695C
 
-Minimal device tree for building TWRP/OrangeFox recovery for Infinix X695C (Note 10 Pro).
+[![TWRP](https://img.shields.io/badge/TWRP-11-blue.svg)](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp)
+[![Device](https://img.shields.io/badge/Device-X695C-green.svg)]()
+[![Platform](https://img.shields.io/badge/Platform-MT6785-orange.svg)]()
 
-## Device Information
+TWRP recovery device tree for **Infinix Note 10 Pro (X695C)** - MediaTek MT6785 (Helio G95)
+
+---
+
+## 📱 Device Information
 
 | Property | Value |
 |----------|-------|
 | **Device** | Infinix X695C |
-| **Codename** | Infinix-X695C |
+| **Codename** | x695c |
 | **Marketing Name** | Infinix Note 10 Pro |
 | **Manufacturer** | INFINIX MOBILITY LIMITED |
 | **Platform** | MediaTek MT6785 (Helio G95) |
@@ -16,150 +22,168 @@ Minimal device tree for building TWRP/OrangeFox recovery for Infinix X695C (Note
 | **A/B Device** | Yes (Virtual A/B) |
 | **Treble** | Yes |
 | **Dynamic Partitions** | Yes |
-| **File-Based Encryption** | Yes |
+| **Encryption** | FBE (File-Based Encryption) |
 
-## What's Included (Essential Only)
+---
 
-This minimal recovery tree contains only essential blobs required for TWRP:
+## ✅ Recovery Features
 
-### Vendor Blobs (~300KB)
-- `libkeymaster4.so` - For FBE decryption
-- `libkeymaster_messages.so` - Keymaster support
-- `libpuresoftkeymasterdevice.so` - Software keymaster
-- `android.hardware.gatekeeper@1.0-impl.so` - Gatekeeper HAL
-- `libhwbinder.so` - HIDL binder
-- `libhidltransport.so` - HIDL transport
+| Feature | Status |
+|---------|--------|
+| Touch Support | ✅ Working |
+| Display/Graphics | ✅ Working |
+| Brightness Control | ✅ Working |
+| Vibrator | ✅ Working |
+| FBE Decryption | ✅ Working |
+| MTP | ✅ Working |
+| USB Mass Storage | ✅ Working |
+| A/B Slot Switch | ✅ Working |
+| Fastbootd | ✅ Working |
+| Backup/Restore | ✅ Working |
 
-### Configuration Files
-- `fstab.mt6785` - File system table
-- `vintf/manifest.xml` - VINTF manifest
+---
 
-### Prebuilt Files (~9.7MB)
-- `kernel` - Stock kernel (9.6MB)
-- `dtb.img` - Device Tree Blob (154KB)
-
-## What's NOT Included (Removed)
-
-The following blobs have been removed as they are not required for recovery:
-- ❌ Audio blobs
-- ❌ Bluetooth blobs
-- ❌ WiFi blobs
-- ❌ Camera blobs
-- ❌ GPS/GNSS blobs
-- ❌ Sensor blobs
-- ❌ Media/OMX blobs
-- ❌ DRM/Widevine blobs
-- ❌ RIL/Modem blobs
-- ❌ Power/Thermal blobs
-- ❌ Light/Vibrator blobs
-- ❌ NVRAM blobs
-- ❌ Touchscreen firmware (if separate)
-- ❌ Fingerprint blobs
-
-## File Structure
-
-```
-X695C-recovery-tree/
-├── Android.bp
-├── Android.mk
-├── AndroidProducts.mk
-├── BoardConfig.mk
-├── device.mk
-├── omni_X695C.mk
-├── vendorsetup.sh
-├── recovery.fstab
-├── system.prop
-├── proprietary-files.txt
-├── download-prebuilts.sh
-├── prebuilt/
-│   ├── kernel              # 9.6MB
-│   └── dtb.img             # 154KB
-├── init/
-│   ├── Android.bp
-│   └── init_X695C.cpp
-├── bootctrl/
-│   ├── Android.bp
-│   ├── BootControl.cpp
-│   ├── BootControl.h
-│   ├── boot_region_control.cpp
-│   └── boot_region_control.h
-├── mtk_plpath_utils/
-│   ├── Android.bp
-│   └── mtk_plpath_utils.cpp
-├── recovery/root/
-│   ├── init.recovery.mt6785.rc
-│   └── system/etc/recovery.fstab
-└── vendor/infinix/X695C/
-    ├── Android.mk
-    ├── lib64/
-    │   ├── libkeymaster4.so
-    │   ├── libkeymaster_messages.so
-    │   ├── libpuresoftkeymasterdevice.so
-    │   ├── libhwbinder.so
-    │   ├── libhidltransport.so
-    │   └── hw/
-    │       └── android.hardware.gatekeeper@1.0-impl.so
-    └── etc/
-        ├── fstab.mt6785
-        └── vintf/manifest.xml
-```
-
-## Building TWRP
+## 🚀 Building TWRP
 
 ### Prerequisites
-- Ubuntu 20.04+ or similar
-- 16 GB+ RAM
-- 200 GB+ disk space
+- Ubuntu 20.04+ or similar Linux distribution
+- 16 GB+ RAM recommended
+- 200 GB+ free disk space
 
 ### Build Steps
 
 ```bash
-# 1. Setup TWRP source
+# 1. Initialize TWRP source
 mkdir -p ~/twrp && cd ~/twrp
-repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
+repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
 repo sync -j$(nproc --all)
 
-# 2. Copy device tree
-cp -r X695C-recovery-tree ~/twrp/device/infinix/X695C
+# 2. Clone device tree (lowercase path)
+git clone https://github.com/hoshiyomiX/android_device_infinix_x695c.git device/infinix/x695c
 
 # 3. Build
 source build/envsetup.sh
-lunch omni_X695C-eng
+lunch omni_x695c-eng
 mka recoveryimage
 
-# 4. Output
-# out/target/product/X695C/boot.img
+# 4. Output location
+# out/target/product/x695c/boot.img
 ```
 
-### Flashing
+### Flashing Recovery
 
 ```bash
-# Boot to fastboot
+# Boot to fastboot mode
 adb reboot bootloader
 
-# Flash recovery (A/B device)
+# Flash recovery (A/B device - flash both slots)
 fastboot flash boot_a boot.img
 fastboot flash boot_b boot.img
+
+# Or flash to active slot only
+fastboot flash boot boot.img
 
 # Reboot to recovery
 fastboot reboot recovery
 ```
 
-## Size Comparison
+---
 
-| Version | Size |
-|---------|------|
-| Full blobs | ~100MB+ |
-| **Minimal (this)** | **~11MB** |
+## 📁 Directory Structure
 
-## Credits
+```
+device/infinix/x695c/
+├── AndroidProducts.mk      # Product definitions
+├── BoardConfig.mk          # Board configuration
+├── device.mk               # Device-specific config
+├── omni_x695c.mk          # TWRP product makefile
+├── system.prop             # System properties
+├── recovery.fstab          # Partition definitions
+├── vendorsetup.sh          # Lunch combo setup
+├── prebuilt/
+│   ├── kernel              # Stock kernel (10 MB)
+│   └── dtb.img             # Device tree blob (157 KB)
+├── init/
+│   ├── Android.bp
+│   └── init_x695c.cpp     # Property override
+├── bootctrl/               # A/B boot control HAL
+├── mtk_plpath_utils/       # Dynamic partition utils
+└── vendor/infinix/x695c/   # Vendor blobs
+    ├── lib64/              # Libraries
+    │   ├── libkeymaster4.so
+    │   ├── libkeymaster4support.so
+    │   ├── libkeymaster_messages.so
+    │   ├── libkeymaster_portable.so
+    │   ├── libpuresoftkeymasterdevice.so
+    │   ├── libhwbinder.so
+    │   ├── libhidltransport.so
+    │   ├── libdrm.so
+    │   ├── libgralloc_*.so
+    │   └── hw/
+    │       ├── android.hardware.gatekeeper@1.0-impl.so
+    │       ├── android.hardware.graphics.*.so
+    │       ├── hwcomposer.mt6785.so
+    │       ├── memtrack.mt6785.so
+    │       ├── lights.mt6785.so
+    │       └── vibrator.default.so
+    ├── firmware/           # Touch firmware
+    │   ├── gt9886_firmware_*.bin
+    │   ├── gt9886_cfg_*.bin
+    │   └── novatek_ts_fw.bin
+    └── etc/vintf/
+        └── manifest.xml
+```
 
-- Original firmware dump: [GitLab](https://gitlab.com/excaliburXD/android_dump_INFINIX_Infinix-X695C)
-- TWRP team
+---
 
-## License
+## 📦 Included Blobs
+
+### FBE Decryption (Keymaster/Gatekeeper)
+- `libkeymaster4.so`
+- `libkeymaster4support.so`
+- `libkeymaster_messages.so`
+- `libkeymaster_portable.so`
+- `libpuresoftkeymasterdevice.so`
+- `android.hardware.gatekeeper@1.0-impl.so`
+
+### Display/Graphics
+- `gralloc.default.so`
+- `android.hardware.graphics.mapper@4.0-impl-mediatek.so`
+- `android.hardware.graphics.allocator@4.0-impl-mediatek.so`
+- `hwcomposer.mt6785.so`
+- `memtrack.mt6785.so`
+- `libgralloc_*.so`
+- `libdrm.so`
+
+### Touch Firmware
+- Goodix GT9886 firmware
+- Novatek touch firmware
+
+---
+
+## 📊 Size
+
+| Component | Size |
+|-----------|------|
+| Kernel + DTB | ~10.2 MB |
+| Vendor blobs | ~2.3 MB |
+| Config files | ~50 KB |
+| **Total** | **~12.5 MB** |
+
+---
+
+## 📜 Credits
+
+- **Firmware dump**: [GitLab](https://gitlab.com/excaliburXD/android_dump_INFINIX_Infinix-X695C)
+- **TWRP team**: [Team Win](https://teamwin.me/)
+- **Minimal TWRP manifest**: [minimal-manifest-twrp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp)
+
+---
+
+## 📄 License
 
 ```
 Copyright (C) 2024
 Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 ```

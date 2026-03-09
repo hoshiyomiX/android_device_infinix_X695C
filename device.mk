@@ -143,60 +143,60 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 # VENDOR BLOBS - Keymaster/Gatekeeper (FBE Decryption)
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libkeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster4.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libkeymaster4support.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster4support.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libkeymaster_messages.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster_messages.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libkeymaster_portable.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster_portable.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libpuresoftkeymasterdevice.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libpuresoftkeymasterdevice.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/android.hardware.gatekeeper@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster4.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster4.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster4support.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster4support.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster_messages.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster_messages.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libkeymaster_portable.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libkeymaster_portable.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libpuresoftkeymasterdevice.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libpuresoftkeymasterdevice.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.gatekeeper@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
 
 # ============================================================================
 # VENDOR BLOBS - HIDL/HwBinder (HAL Communication)
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libhwbinder.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhwbinder.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libhidltransport.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhidltransport.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libhwbinder.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhwbinder.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libhidltransport.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhidltransport.so
 
 # ============================================================================
 # VENDOR BLOBS - Display/Graphics (Recovery UI)
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/gralloc.default.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/gralloc.default.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/android.hardware.graphics.allocator@4.0-impl-mediatek.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.graphics.allocator@4.0-impl-mediatek.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/hwcomposer.mt6785.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/hwcomposer.mt6785.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/memtrack.mt6785.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/memtrack.mt6785.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/android.hardware.memtrack@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.memtrack@1.0-impl.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libgralloc_extra.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgralloc_extra.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libgralloc_metadata.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgralloc_metadata.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libgralloctypes_mtk.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgralloctypes_mtk.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/libdrm.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libdrm.so \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/android.hardware.graphics.composer@2.1-resources.so:$(TARGET_COPY_OUT_VENDOR)/lib64/android.hardware.graphics.composer@2.1-resources.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/gralloc.default.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/gralloc.default.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.graphics.allocator@4.0-impl-mediatek.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.graphics.allocator@4.0-impl-mediatek.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/hwcomposer.mt6785.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/hwcomposer.mt6785.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/memtrack.mt6785.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/memtrack.mt6785.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.memtrack@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.memtrack@1.0-impl.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libgralloc_extra.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgralloc_extra.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libgralloc_metadata.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgralloc_metadata.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libgralloctypes_mtk.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgralloctypes_mtk.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libdrm.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libdrm.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/android.hardware.graphics.composer@2.1-resources.so:$(TARGET_COPY_OUT_VENDOR)/lib64/android.hardware.graphics.composer@2.1-resources.so
 
 # ============================================================================
 # VENDOR BLOBS - Vibrator HAL (Haptic Feedback)
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/vibrator.default.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/vibrator.default.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/vibrator.default.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/vibrator.default.so
 
 # ============================================================================
 # VENDOR BLOBS - Lights HAL (Brightness Control)
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/lib64/hw/lights.mt6785.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/lights.mt6785.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/lights.mt6785.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/lights.mt6785.so
 
 # ============================================================================
 # VENDOR BLOBS - Touch Firmware
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/firmware/gt9886_firmware_6785a4.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_firmware_6785a4.bin \
-    $(LOCAL_PATH)/vendor/infinix/X695C/firmware/gt9886_firmware_6785ae.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_firmware_6785ae.bin \
-    $(LOCAL_PATH)/vendor/infinix/X695C/firmware/gt9886_cfg_6785v96.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_cfg_6785v96.bin \
-    $(LOCAL_PATH)/vendor/infinix/X695C/firmware/gt9886_cfg_6785v99.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_cfg_6785v99.bin \
-    $(LOCAL_PATH)/vendor/infinix/X695C/firmware/novatek_ts_fw.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/novatek_ts_fw.bin
+    $(LOCAL_PATH)/vendor/infinix/x695c/firmware/gt9886_firmware_6785a4.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_firmware_6785a4.bin \
+    $(LOCAL_PATH)/vendor/infinix/x695c/firmware/gt9886_firmware_6785ae.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_firmware_6785ae.bin \
+    $(LOCAL_PATH)/vendor/infinix/x695c/firmware/gt9886_cfg_6785v96.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_cfg_6785v96.bin \
+    $(LOCAL_PATH)/vendor/infinix/x695c/firmware/gt9886_cfg_6785v99.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/gt9886_cfg_6785v99.bin \
+    $(LOCAL_PATH)/vendor/infinix/x695c/firmware/novatek_ts_fw.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/novatek_ts_fw.bin
 
 # ============================================================================
 # VINTF Manifest
 # ============================================================================
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/X695C/etc/vintf/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vintf/manifest.xml
+    $(LOCAL_PATH)/vendor/infinix/x695c/etc/vintf/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vintf/manifest.xml
