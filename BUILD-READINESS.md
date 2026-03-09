@@ -202,7 +202,7 @@ cp -r /path/to/X695C-recovery-tree device/infinix/X695C
 # 4. Build
 . build/envsetup.sh
 lunch omni_X695C-eng
-mka recoveryimage
+mka bootimage
 ```
 
 ---

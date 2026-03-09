@@ -51,7 +51,7 @@ source build/envsetup.sh
 lunch omni_X695C-eng
 
 # Build recovery
-mka recoveryimage
+mka bootimage
 ```
 
 ### 5. Flash Recovery
@@ -73,7 +73,7 @@ fastboot reboot recovery
 ### TWRP (Default)
 ```bash
 lunch omni_X695C-eng
-mka recoveryimage
+mka bootimage
 ```
 
 ### OrangeFox

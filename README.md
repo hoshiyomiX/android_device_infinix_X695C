@@ -64,7 +64,7 @@ git clone https://github.com/hoshiyomiX/android_device_infinix_x695c.git device/
 # 3. Build
 source build/envsetup.sh
 lunch omni_x695c-eng
-mka recoveryimage
+mka bootimage
 
 # 4. Output location
 # out/target/product/x695c/boot.img
