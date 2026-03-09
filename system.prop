@@ -1,0 +1,50 @@
+# Copyright (C) 2024 Recovery Tree Rebuild for Infinix X695C
+# SPDX-License-Identifier: Apache-2.0
+#
+# System properties for Infinix X695C
+#
+
+# ============================================================================
+# DEVICE IDENTIFICATION
+# ============================================================================
+ro.product.brand=Infinix
+ro.product.name=X695C-GL
+ro.product.device=Infinix-X695C
+ro.product.model=Infinix X695C
+ro.product.marketname=Infinix Note 10 Pro
+ro.product.manufacturer=INFINIX MOBILITY LIMITED
+
+# ============================================================================
+# PLATFORM
+# ============================================================================
+ro.board.platform=mt6785
+ro.mediatek.platform=mt6785
+ro.mtk_platform=MT6785
+
+# ============================================================================
+# ARCHITECTURE
+# ============================================================================
+ro.product.cpu.abi=arm64-v8a
+ro.product.cpu.abilist=arm64-v8a,armeabi-v7a,armeabi
+ro.product.cpu.abilist32=armeabi-v7a,armeabi
+ro.product.cpu.abilist64=arm64-v8a
+
+# ============================================================================
+# ANDROID VERSION
+# ============================================================================
+ro.build.version.sdk=30
+ro.build.version.release=11
+ro.build.version.security_patch=2099-12-31
+
+# ============================================================================
+# DISPLAY
+# ============================================================================
+ro.sf.lcd_density=480
+debug.sf.disable_backpressure=1
+debug.sf.early_phase_offset_ns=500000
+debug.sf.early_gl_phase_offset_ns=3000000
+
+# ============================================================================
+# VENDOR SECURITY PATCH (Anti-rollback bypass)
+# ============================================================================
+ro.vendor.build.security_patch=2099-12-31

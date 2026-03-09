@@ -1,0 +1,11 @@
+on early-init
+    setprop ro.product.device Infinix-X695C
+    setprop ro.product.model "Infinix X695C"
+
+on init
+    mkdir /mnt/vendor 0775 root system
+    mkdir /metadata 0771 root system
+
+on boot
+    setenforce 0
+    start logd

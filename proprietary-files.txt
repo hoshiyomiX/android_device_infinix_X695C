@@ -1,0 +1,62 @@
+# Proprietary blobs for Infinix X695C TWRP Recovery
+# Extract from device using: ./extract-files.sh
+# Or from stock ROM vendor.img
+#
+# ╔════════════════════════════════════════════════════════════════════╗
+# ║  BLOBS ARE STORED IN GIT LFS - CANNOT BE DOWNLOADED DIRECTLY       ║
+# ║  Use extract-files.sh to pull from a real device                   ║
+# ╚════════════════════════════════════════════════════════════════════╝
+
+# ============================================================================
+# 1. GRAPHICS/DISPLAY (Required for TWRP GUI) - MUST EXTRACT
+# ============================================================================
+vendor/lib64/hw/gralloc.mt6785.so
+vendor/lib64/libui.so
+vendor/lib64/libgui.so
+vendor/lib64/libion.so
+vendor/lib64/libhidlbase.so
+vendor/lib64/libhwbinder.so
+vendor/lib64/libhidltransport.so
+
+# ============================================================================
+# 2. KEYMASTER (Required for FBE Decryption) - PARTIALLY AVAILABLE
+# ============================================================================
+vendor/lib64/libkeymaster4.so                    # ✅ Available
+vendor/lib64/libkeymaster_messages.so            # ✅ Available
+vendor/lib64/libpuresoftkeymasterdevice.so       # ✅ Available
+vendor/lib64/hw/android.hardware.keymaster@4.0-impl.so  # ❌ Extract needed
+
+# ============================================================================
+# 3. GATEKEEPER (Required for Authentication) - PARTIALLY AVAILABLE
+# ============================================================================
+vendor/lib64/libgatekeeper.so                    # ❌ Extract needed
+vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl.so  # ✅ Available
+
+# ============================================================================
+# 4. BOOT CONTROL (Required for A/B Slot Switching)
+# ============================================================================
+# Built from source in bootctrl/
+
+# ============================================================================
+# 5. HEALTH HAL (Already included in TWRP)
+# ============================================================================
+# android.hardware.health@2.0-impl.so is built from TWRP source
+
+# ============================================================================
+# 6. SYSTEM LIBRARIES - EXTRACT NEEDED
+# ============================================================================
+vendor/lib64/libutils.so
+vendor/lib64/libcutils.so
+vendor/lib64/liblog.so
+vendor/lib64/libbase.so
+
+# ============================================================================
+# 7. MTK PLATFORM - PARTIALLY AVAILABLE
+# ============================================================================
+vendor/lib64/libmtk_drv.so                       # ❌ Extract needed
+
+# ============================================================================
+# 8. CONFIGURATION FILES - AVAILABLE
+# ============================================================================
+vendor/etc/fstab.mt6785                          # ✅ Available
+vendor/etc/vintf/manifest.xml                    # ✅ Available

@@ -1,0 +1,35 @@
+cc_library_shared {
+    name: "android.hardware.boot@1.1-mtkimpl",
+    srcs: [
+        "BootControl.cpp",
+        "boot_region_control.cpp",
+    ],
+    cflags: ["-Wall", "-Werror"],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "android.hardware.boot@1.0",
+        "android.hardware.boot@1.1",
+    ],
+    proprietary: true,
+}
+
+cc_library_shared {
+    name: "android.hardware.boot@1.1-mtkimpl.recovery",
+    srcs: [
+        "BootControl.cpp",
+        "boot_region_control.cpp",
+    ],
+    cflags: ["-Wall", "-Werror", "-DRECOVERY_BUILD"],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "android.hardware.boot@1.0",
+        "android.hardware.boot@1.1",
+    ],
+    recovery: true,
+}

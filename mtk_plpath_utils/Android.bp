@@ -1,0 +1,15 @@
+cc_binary {
+    name: "mtk_plpath_utils",
+    srcs: ["mtk_plpath_utils.cpp"],
+    cflags: ["-Wall", "-Werror"],
+    shared_libs: ["libbase", "liblog"],
+    recovery_available: true,
+}
+
+cc_binary {
+    name: "mtk_plpath_utils.recovery",
+    srcs: ["mtk_plpath_utils.cpp"],
+    cflags: ["-Wall", "-Werror", "-DRECOVERY_BUILD"],
+    shared_libs: ["libbase", "liblog"],
+    recovery: true,
+}

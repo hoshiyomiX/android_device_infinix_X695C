@@ -1,0 +1,63 @@
+//
+// Copyright (C) 2024 The Android Open Source Project
+// Copyright (C) 2024 Recovery Tree Rebuild for Infinix X695C
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+soong_namespace {
+    imports: [
+        "hardware/interfaces/boot/1.1",
+        "system/core/init",
+    ],
+}
+
+// ============================================================================
+// INIT LIBRARY
+// ============================================================================
+cc_library_static {
+    name: "libinit_X695C",
+    srcs: ["init/init_X695C.cpp"],
+    cflags: ["-Wall", "-Werror"],
+    include_dirs: ["system/core/init"],
+    static_libs: ["libbase"],
+    proprietary: false,
+}
+
+// ============================================================================
+// BOOT CONTROL HAL
+// ============================================================================
+cc_library_shared {
+    name: "android.hardware.boot@1.1-mtkimpl",
+    srcs: [
+        "bootctrl/BootControl.cpp",
+        "bootctrl/boot_region_control.cpp",
+    ],
+    cflags: ["-Wall", "-Werror"],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "android.hardware.boot@1.0",
+        "android.hardware.boot@1.1",
+    ],
+    header_libs: [
+        "libhardware_headers",
+    ],
+    proprietary: true,
+}
+
+// ============================================================================
+// MTK PLPATH UTILS
+// ============================================================================
+cc_binary {
+    name: "mtk_plpath_utils",
+    srcs: ["mtk_plpath_utils/mtk_plpath_utils.cpp"],
+    cflags: ["-Wall", "-Werror"],
+    shared_libs: [
+        "libbase",
+        "liblog",
+    ],
+    proprietary: false,
+}
