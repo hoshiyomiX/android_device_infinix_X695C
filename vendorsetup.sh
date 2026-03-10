@@ -4,6 +4,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Add the device to lunch menu
-add_lunch_combo omni_x695c-userdebug
-add_lunch_combo omni_x695c-eng
+# Add the device to lunch menu (deprecated - use AndroidProducts.mk instead)
+# add_lunch_combo twrp_x695c-userdebug
+# add_lunch_combo twrp_x695c-eng
