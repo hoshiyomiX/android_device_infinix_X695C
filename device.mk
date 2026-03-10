@@ -182,5 +182,6 @@ PRODUCT_COPY_FILES += \
 # ============================================================================
 # VINTF Manifest
 # ============================================================================
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/infinix/x695c/etc/vintf/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vintf/manifest.xml
+# Note: VINTF manifest should be set via BoardConfig.mk using DEVICE_MANIFEST_FILE
+# PRODUCT_COPY_FILES is not allowed for VINTF metadata
+# DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/vendor/infinix/x695c/etc/vintf/manifest.xml
