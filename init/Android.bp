@@ -5,4 +5,5 @@ cc_library_static {
     include_dirs: ["system/core/init"],
     static_libs: ["libbase"],
     recovery_available: true,
+    vendor_available: true,
 }
