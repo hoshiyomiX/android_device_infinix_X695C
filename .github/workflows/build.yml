@@ -137,6 +137,10 @@ jobs:
           echo "| Commit | ${{ github.sha }} |" >> output/BUILD_INFO.md
           
           ls -la output/
+          
+          # Copy to workspace for release upload
+          mkdir -p $GITHUB_WORKSPACE/output
+          cp -r output/* $GITHUB_WORKSPACE/output/
 
       - name: Upload boot.img artifact
         uses: actions/upload-artifact@v4
@@ -145,7 +149,7 @@ jobs:
           path: ~/twrp/output/
           retention-days: 30
 
-      - name: Upload to Release (on main branch push)
+      - name: Upload to Release (on twrp-11 branch push)
         if: github.ref == 'refs/heads/twrp-11' && github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
@@ -164,8 +168,8 @@ jobs:
             fastboot reboot recovery
             ```
           files: |
-            ~/twrp/output/boot.img
-            ~/twrp/output/BUILD_INFO.md
+            ${{ github.workspace }}/output/boot.img
+            ${{ github.workspace }}/output/BUILD_INFO.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
