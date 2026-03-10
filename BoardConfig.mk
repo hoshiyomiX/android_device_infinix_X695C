@@ -228,8 +228,10 @@ TW_CUSTOM_BATTERY_POS := "790"
 # ============================================================================
 # INIT
 # ============================================================================
-TARGET_INIT_VENDOR_LIB := libinit_x695c
-TARGET_RECOVERY_DEVICE_MODULES := libinit_x695c
+# Note: TARGET_INIT_VENDOR_LIB is not needed for TWRP builds
+# The init library is only needed for full system builds
+# TARGET_INIT_VENDOR_LIB := libinit_x695c
+# TARGET_RECOVERY_DEVICE_MODULES := libinit_x695c
 
 # ============================================================================
 # DEBUG
