@@ -5,47 +5,24 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# ============================================================================
-# INHERIT FROM CORE PRODUCTS
-# ============================================================================
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+LOCAL_PATH := device/infinix/x695c
 
 # ============================================================================
-# GSI KEYS (for developer GSI with verified boot)
+# A/B OTA CONFIGURATION
 # ============================================================================
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
-
-# ============================================================================
-# VIRTUAL A/B OTA
-# ============================================================================
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-
-ENABLE_VIRTUAL_AB := true
 AB_OTA_UPDATER := true
 
-# A/B OTA Partitions
 AB_OTA_PARTITIONS += \
     system \
     vendor \
     product \
     system_ext \
     boot \
-    vendor_boot \
-    lk \
-    logo \
-    dtbo \
     vbmeta \
     vbmeta_vendor \
     vbmeta_system
 
 # A/B Postinstall Configuration
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/mtk_plpath_utils \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
-
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
@@ -57,7 +34,10 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # ============================================================================
 PRODUCT_PACKAGES += \
     otapreopt_script \
-    cppreopts.sh
+    cppreopts.sh \
+    update_engine \
+    update_verifier \
+    update_engine_sideload
 
 # ============================================================================
 # DYNAMIC PARTITIONS
@@ -77,18 +57,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2099-12-31
 
 # ============================================================================
-# HEALTH HAL
-# ============================================================================
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service
-
-# ============================================================================
 # BOOT CONTROL HAL (MTK Implementation for A/B)
 # ============================================================================
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-mtkimpl.recovery \
-    android.hardware.boot@1.1-mtkimpl
+    android.hardware.boot@1.1-mtkimpl \
+    android.hardware.boot@1.1-mtkimpl.recovery
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctrl
@@ -106,17 +79,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     mtk_plpath_utils \
     mtk_plpath_utils.recovery
-
-# ============================================================================
-# UPDATE ENGINE
-# ============================================================================
-PRODUCT_PACKAGES_DEBUG += \
-    update_engine_client
-
-PRODUCT_PACKAGES += \
-    update_engine \
-    update_verifier \
-    update_engine_sideload
 
 # ============================================================================
 # ADDITIONAL LIBRARIES FOR FBE CRYPTO

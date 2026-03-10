@@ -16,48 +16,15 @@ soong_namespace {
 // INIT LIBRARY
 // ============================================================================
 cc_library_static {
-    name: "libinit_X695C",
-    srcs: ["init/init_X695C.cpp"],
+    name: "libinit_x695c",
+    srcs: ["init/init_x695c.cpp"],
     cflags: ["-Wall", "-Werror"],
     include_dirs: ["system/core/init"],
     static_libs: ["libbase"],
     proprietary: false,
 }
 
-// ============================================================================
-// BOOT CONTROL HAL
-// ============================================================================
-cc_library_shared {
-    name: "android.hardware.boot@1.1-mtkimpl",
-    srcs: [
-        "bootctrl/BootControl.cpp",
-        "bootctrl/boot_region_control.cpp",
-    ],
-    cflags: ["-Wall", "-Werror"],
-    shared_libs: [
-        "libbase",
-        "libhidlbase",
-        "liblog",
-        "libutils",
-        "android.hardware.boot@1.0",
-        "android.hardware.boot@1.1",
-    ],
-    header_libs: [
-        "libhardware_headers",
-    ],
-    proprietary: true,
-}
-
-// ============================================================================
-// MTK PLPATH UTILS
-// ============================================================================
-cc_binary {
-    name: "mtk_plpath_utils",
-    srcs: ["mtk_plpath_utils/mtk_plpath_utils.cpp"],
-    cflags: ["-Wall", "-Werror"],
-    shared_libs: [
-        "libbase",
-        "liblog",
-    ],
-    proprietary: false,
-}
+// Note: bootctrl and mtk_plpath_utils modules are defined in their respective
+// subdirectory Android.bp files to avoid duplicate definitions.
+// - bootctrl/Android.bp: android.hardware.boot@1.1-mtkimpl
+// - mtk_plpath_utils/Android.bp: mtk_plpath_utils
