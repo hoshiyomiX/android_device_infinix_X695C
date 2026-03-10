@@ -12,9 +12,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # ============================================================================
-# INHERIT SOME COMMON OMNI STUFF (for minimal-manifest-twrp)
+# INHERIT SOME COMMON TWRP STUFF
 # ============================================================================
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # ============================================================================
 # INHERIT FROM DEVICE
@@ -25,7 +25,7 @@ $(call inherit-product, device/infinix/x695c/device.mk)
 # DEVICE IDENTIFIER
 # ============================================================================
 PRODUCT_DEVICE := x695c
-PRODUCT_NAME := omni_x695c
+PRODUCT_NAME := twrp_x695c
 PRODUCT_BRAND := Infinix
 PRODUCT_MODEL := Infinix X695C
 PRODUCT_MANUFACTURER := INFINIX MOBILITY LIMITED

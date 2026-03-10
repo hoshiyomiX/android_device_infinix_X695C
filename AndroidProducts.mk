@@ -5,8 +5,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_x695c.mk
+    $(LOCAL_DIR)/twrp_x695c.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_x695c-userdebug \
-    omni_x695c-eng
+    twrp_x695c-userdebug \
+    twrp_x695c-eng
