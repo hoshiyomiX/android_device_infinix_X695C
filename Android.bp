@@ -12,19 +12,8 @@ soong_namespace {
     ],
 }
 
-// ============================================================================
-// INIT LIBRARY
-// ============================================================================
-cc_library_static {
-    name: "libinit_x695c",
-    srcs: ["init/init_x695c.cpp"],
-    cflags: ["-Wall", "-Werror"],
-    include_dirs: ["system/core/init"],
-    static_libs: ["libbase"],
-    proprietary: false,
-}
-
-// Note: bootctrl and mtk_plpath_utils modules are defined in their respective
-// subdirectory Android.bp files to avoid duplicate definitions.
-// - bootctrl/Android.bp: android.hardware.boot@1.1-mtkimpl
-// - mtk_plpath_utils/Android.bp: mtk_plpath_utils
+// Note: All modules are defined in their respective subdirectory Android.bp files
+// to avoid duplicate definitions:
+// - init/Android.bp: libinit_x695c
+// - bootctrl/Android.bp: android.hardware.boot@1.1-mtkimpl, android.hardware.boot@1.1-mtkimpl.recovery
+// - mtk_plpath_utils/Android.bp: mtk_plpath_utils, mtk_plpath_utils.recovery
