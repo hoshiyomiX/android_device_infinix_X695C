@@ -108,7 +108,7 @@ jobs:
         run: |
           cd ~/twrp
           source build/envsetup.sh
-          lunch omni_${{ env.DEVICE }}-eng
+          lunch twrp_${{ env.DEVICE }}-eng
           mka bootimage -j$(nproc --all)
 
       - name: Prepare artifacts
