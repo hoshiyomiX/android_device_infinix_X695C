@@ -1,12 +1,2 @@
-#
-# Copyright (C) 2024 Recovery Tree Rebuild for Infinix X695C
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_x695c.mk
-
-COMMON_LUNCH_CHOICES := \
-    twrp_x695c-userdebug \
-    twrp_x695c-eng
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/orangefox_x695c.mk
+COMMON_LUNCH_CHOICES := orangefox_x695c-userdebug orangefox_x695c-eng

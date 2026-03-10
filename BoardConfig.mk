@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2024 The Android Open Source Project
-# Copyright (C) 2024 Recovery Tree Rebuild for Infinix X695C
+# Copyright (C) 2024 OrangeFox Recovery Tree for Infinix X695C
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -51,7 +51,7 @@ TARGET_BOOTLOADER_BOARD_NAME := mt6785
 TARGET_NO_BOOTLOADER := true
 
 # ============================================================================
-# BUILD HACKS (for older TWRP compatibility)
+# BUILD HACKS (for older recovery compatibility)
 # ============================================================================
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
@@ -60,10 +60,7 @@ BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 # ============================================================================
 # KERNEL CONFIGURATION
 # ============================================================================
-# Kernel cmdline from boot.img
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
-
-# Boot image header
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_BASE := 0x40078000
@@ -72,16 +69,12 @@ BOARD_RAMDISK_OFFSET := 0x07c08000
 BOARD_KERNEL_TAGS_OFFSET := 0x0bc08000
 BOARD_SECOND_OFFSET := 0xbff88000
 BOARD_DTB_OFFSET := 0x0bc08000
-
-# Kernel image name
 BOARD_KERNEL_IMAGE_NAME := kernel
 
-# Prebuilt kernel and DTB
 TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 
-# mkbootimg arguments
 BOARD_MKBOOTIMG_ARGS += \
     --header_version $(BOARD_BOOT_HEADER_VERSION) \
     --pagesize $(BOARD_KERNEL_PAGESIZE) \
@@ -103,21 +96,15 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 # PARTITION SIZES
 # ============================================================================
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-# Boot partition size
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
-
-# Metadata partition
 BOARD_USES_METADATA_PARTITION := true
 
-# Filesystem types
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 
-# Copy out paths
 TARGET_COPY_OUT_SYSTEM := system
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
@@ -129,11 +116,7 @@ TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := main
 BOARD_MAIN_SIZE := 9122611200
-BOARD_MAIN_PARTITION_LIST := \
-    system \
-    vendor \
-    product \
-    system_ext
+BOARD_MAIN_PARTITION_LIST := system vendor product system_ext
 
 # ============================================================================
 # RECOVERY CONFIGURATION
@@ -152,13 +135,8 @@ TARGET_USES_MKE2FS := true
 TARGET_NO_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
-# USB Mass Storage
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-
-# System properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-# Recovery fstab
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
 # ============================================================================
@@ -167,13 +145,23 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 TARGET_BOARD_PLATFORM := mt6785
 
 # ============================================================================
-# CRYPTO (File-Based Encryption)
+# ORANGEFOX CRYPTO (File-Based Encryption A11+)
 # ============================================================================
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
-TW_USE_FSCRYPT_POLICY := 2
-TW_PREPARE_DATA_MEDIA_EARLY := true
+OF_DEVICE_ENCRYPTION := true
+OF_FBE_CONFIG := true
+OF_LEGACY_CRYPTO := false
+OF_RUN_KEYMASTER_VIA_QSEE := false
+OF_SUPPORT_ALL_BLOCK_UEVENTS := true
+
+# OrangeFox FBE decryption libraries
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libkeymaster4 \
+    libkeymaster4support \
+    libkeymaster_messages \
+    libkeymaster_portable \
+    libpuresoftkeymasterdevice \
+    libhwbinder \
+    libhidltransport
 
 # ============================================================================
 # ANTI-ROLLBACK BYPASS (Hack)
@@ -185,53 +173,31 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # ============================================================================
-# TWRP TOOLS
+# ORANGEFOX TOOLS
 # ============================================================================
-TW_INCLUDE_NTFS_3G := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_FASTBOOTD := true
-TW_INCLUDE_LIBLP := true
-TW_INCLUDE_RESETPROP := true
+OF_USE_LZMA_RECOVERY := true
+OF_USE_MAGISKBOOT_FOR_ALL_PATCHES := true
+OF_NO_TREBLE_COMPAT_CHECK := true
+OF_SKIP_MULTIUSER_FOLDERS_BACKUP := true
 
 # ============================================================================
-# TWRP UI CONFIGURATION
+# ORANGEFOX UI CONFIGURATION
 # ============================================================================
-TW_THEME := portrait_hdpi
-TW_DEFAULT_LANGUAGE := en
-TW_HAS_MTP := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_EXCLUDE_APEX := true
-TW_EXCLUDE_LPDUMP := true
-TW_NO_TWRPAPP := true
-TW_NO_SCREEN_TIMEOUT := true
-TW_SCREEN_BLANK_ON_BOOT := true
+OF_SCREEN_H := 2460
+OF_SCREEN_W := 1080
+OF_DPI := 400
+OF_STATUS_H := 40
+OF_STATUS_INDENT := 40
+OF_CLOCK_POS := 300
 
-# Brightness
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 2047
-TW_DEFAULT_BRIGHTNESS := 1200
-
-# Frame rate
-TW_FRAMERATE := 60
-
-# Device version
-TW_DEVICE_VERSION := Infinix-X695C-Rebuild
+# Hide not needed items
+OF_HIDE_REPACK_MENU := false
+OF_HIDE_ADB_SIDEBAR := false
 
 # ============================================================================
-# STATUS BAR CUSTOMIZATION
+# ORANGEFOX MAINTAINER
 # ============================================================================
-TW_STATUS_ICONS_ALIGN := center
-TW_CUSTOM_CPU_POS := "300"
-TW_CUSTOM_CLOCK_POS := "70"
-TW_CUSTOM_BATTERY_POS := "790"
-
-# ============================================================================
-# INIT
-# ============================================================================
-# Note: TARGET_INIT_VENDOR_LIB is not needed for TWRP builds
-# The init library is only needed for full system builds
-# TARGET_INIT_VENDOR_LIB := libinit_x695c
-# TARGET_RECOVERY_DEVICE_MODULES := libinit_x695c
+OF_MAINTAINER := hoshiyomiX
 
 # ============================================================================
 # DEBUG
