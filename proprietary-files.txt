@@ -8,7 +8,37 @@
 # ╚════════════════════════════════════════════════════════════════════╝
 
 # ============================================================================
-# 1. GRAPHICS/DISPLAY (Required for TWRP GUI) - MUST EXTRACT
+# 1. TEE/DECRIPTION (Required for FBE Decryption) - CRITICAL
+# ============================================================================
+vendor/bin/teei_daemon                              # ✅ Microtrust TEE Daemon
+vendor/lib64/libTEECommon.so                       # ✅ TEE Common Library
+vendor/lib64/libimsg_log.so                        # ✅ TEE Messaging Log
+vendor/lib64/hw/gatekeeper.default.so              # ✅ Default Gatekeeper
+vendor/lib64/hw/libSoftGatekeeper.so               # ✅ Software Gatekeeper
+
+# Trusted Applications (TA) - Required for TEE
+vendor/thh/ta/020b0000000000000000000000000000.ta
+vendor/thh/ta/020f0000000000000000000000000000.ta
+vendor/thh/ta/06090000000000000000000000000000.ta
+vendor/thh/ta/05120000000000000000000000000000.ta
+vendor/thh/ta/07060000000000000000000000007169.ta
+vendor/thh/ta/07407000000000000000000000000000.ta
+vendor/thh/ta/08030000000000000000000000000000.ta
+vendor/thh/ta/08070000000000000000000000008270.ta
+vendor/thh/ta/09010000000000000000000000000000.ta
+vendor/thh/ta/0f5eed3c3b5a47afacca69a84bf0efad.ta
+vendor/thh/ta/40188311faf343488db888ad39496f9a.ta
+vendor/thh/ta/5020170115e016302017012521300000.ta
+vendor/thh/ta/85f630e0f0964c5fa2cc268ce04e3da3.ta
+vendor/thh/ta/9073f03a9618383bb1856eb3f990babd.ta
+vendor/thh/ta/93feffccd8ca11e796c7c7a21acb4932.ta
+vendor/thh/ta/98fb95bcb4bf42d26473eae48690d7ea.ta
+vendor/thh/ta/7b66512021214487ba710a51d7ea78fe.ta
+vendor/thh/ta/c09c9c5daa504b78b0e46eda61556c3a.ta
+vendor/thh/ta/c1882f2d885e4e13a8c8e2622461b2fa.ta
+
+# ============================================================================
+# 2. GRAPHICS/DISPLAY (Required for TWRP GUI) - MUST EXTRACT
 # ============================================================================
 vendor/lib64/hw/gralloc.mt6785.so
 vendor/lib64/libui.so

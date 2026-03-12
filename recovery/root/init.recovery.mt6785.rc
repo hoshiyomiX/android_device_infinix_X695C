@@ -1,5 +1,9 @@
 # Recovery init for Infinix X695C
-# FBE Decryption Support - MediaTek Beanpod Keymaster
+# FBE Decryption Support - MediaTek Beanpod Keymaster with Microtrust TEE
+# Based on firmware dump analysis
+
+# Import Microtrust TEE configuration (required for decryption)
+import /microtrust.rc
 
 on early-init
     setprop ro.product.device Infinix-X695C
@@ -7,41 +11,117 @@ on early-init
     setprop ro.product.brand Infinix
 
 on init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.ffs.aio_compat 1
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+
+    # Create directories for decryption
     mkdir /mnt/vendor 0775 root system
     mkdir /metadata 0771 root system
     mkdir /metadata/vold 0771 root system
     mkdir /metadata/vold/metadata_encryption 0771 root system
+
+on fs && property:ro.debuggable=0
+    # distinguish USB should connect or not, i.e. CDP vs SDP
+    write /sys/class/udc/musb-hdrc/device/cmode 2
+    # set charging free due to it wait for USB activation
+    start adbd
+    # Mount persist partition for RPMB access
+    mkdir /mnt/vendor/persist 0771 root root
+    mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
+    # Keyring and crypto setup
+    install_keyring
+    setprop crypto.ready 1
 
 on post-fs
     # Create directories for keymaster
     mkdir /data/misc/keystore 0700 keystore keystore
     mkdir /data/misc/keystore/user_0 0700 keystore keystore
 
-on boot
-    setenforce 0
-    start logd
-    
-    # Start keymaster HAL for FBE decryption
-    start vendor.keymaster-4-0-beanpod
-    start vendor.gatekeeper-1-0
+    # Support A/B feature for EMMC and UFS boot region
+    wait /dev/block/mmcblk0boot0 2
+    symlink /dev/block/sda /dev/block/mmcblk0boot0
+    symlink /dev/block/sdb /dev/block/mmcblk0boot1
+    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
 
-# Keymaster service (Beanpod - MediaTek TEE)
-service vendor.keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
-    class early_hal
-    user system
-    group system drmrpc
-    disabled
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_emmc_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_emmc_b
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
+
+    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
+    start mtk.plpath.utils.link
+
+service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
+    class main
+    user root
+    group root system
     oneshot
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
 
 # Gatekeeper service
 service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     class hal
-    user system
-    group system
+    user root
+    group root
     disabled
-    oneshot
+    seclabel u:r:recovery:s0
 
-on property:twrp.crypto.ready=1
+# Keymaster service (Beanpod - MediaTek TEE)
+service vendor.keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    class early_hal
+    user root
+    group root drmrpc
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:hwservicemanager.ready=true
     start vendor.keymaster-4-0-beanpod
     start vendor.gatekeeper-1-0
+
+on property:crypto.ready=1
+    start vendor.keymaster-4-0-beanpod
+
+on property:vendor.sys.listener.registered=true
+    start vendor.keymaster-4-0-beanpod
+    start vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop teei_daemon
+    stop vendor.keymaster-4-0-beanpod
+    stop vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unencrypted
+    stop teei_daemon
+    stop vendor.keymaster-4-0-beanpod
+    stop vendor.gatekeeper-1-0
+
+on property:twrp.decrypt.done=true
+    stop teei_daemon
+    stop vendor.keymaster-4-0-beanpod
+    stop vendor.gatekeeper-1-0
+
+on boot
+    setenforce 0
+    start logd
+    start boot-hal-1-1
+    start health-hal-2-1

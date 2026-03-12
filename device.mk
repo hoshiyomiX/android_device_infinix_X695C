@@ -118,11 +118,44 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/vendor.mediatek.hardware.keymaster_attestation@1.1.so:$(TARGET_COPY_OUT_VENDOR)/lib64/vendor.mediatek.hardware.keymaster_attestation@1.1.so \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-impl.so
 
+# TEE Daemon (Microtrust) - Required for FBE Decryption
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/bin/teei_daemon:$(TARGET_COPY_OUT_VENDOR)/bin/teei_daemon
+
+# TEE Libraries
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libTEECommon.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libTEECommon.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/libimsg_log.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libimsg_log.so
+
+# TA (Trusted Applications) - Required for TEE
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/020b0000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/020b0000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/020f0000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/020f0000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/06090000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/06090000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/05120000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/05120000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/07060000000000000000000000007169.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/07060000000000000000000000007169.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/07407000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/07407000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/08030000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/08030000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/08070000000000000000000000008270.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/08070000000000000000000000008270.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/09010000000000000000000000000000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/09010000000000000000000000000000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/0f5eed3c3b5a47afacca69a84bf0efad.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/0f5eed3c3b5a47afacca69a84bf0efad.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/40188311faf343488db888ad39496f9a.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/40188311faf343488db888ad39496f9a.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/5020170115e016302017012521300000.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/5020170115e016302017012521300000.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/85f630e0f0964c5fa2cc268ce04e3da3.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/85f630e0f0964c5fa2cc268ce04e3da3.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/9073f03a9618383bb1856eb3f990babd.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/9073f03a9618383bb1856eb3f990babd.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/93feffccd8ca11e796c7c7a21acb4932.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/93feffccd8ca11e796c7c7a21acb4932.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/98fb95bcb4bf42d26473eae48690d7ea.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/98fb95bcb4bf42d26473eae48690d7ea.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/7b66512021214487ba710a51d7ea78fe.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/7b66512021214487ba710a51d7ea78fe.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/c09c9c5daa504b78b0e46eda61556c3a.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/c09c9c5daa504b78b0e46eda61556c3a.ta \
+    $(LOCAL_PATH)/vendor/infinix/x695c/thh/ta/c1882f2d885e4e13a8c8e2622461b2fa.ta:$(TARGET_COPY_OUT_VENDOR)/thh/ta/c1882f2d885e4e13a8c8e2622461b2fa.ta
+
 # Gatekeeper HAL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/android.hardware.gatekeeper@1.0-impl.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/android.hardware.gatekeeper@1.0-impl.so \
     $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/gatekeeper.beanpod.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/gatekeeper.beanpod.so \
-    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/kmsetkey.beanpod.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/kmsetkey.beanpod.so
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/kmsetkey.beanpod.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/kmsetkey.beanpod.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/gatekeeper.default.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/gatekeeper.default.so \
+    $(LOCAL_PATH)/vendor/infinix/x695c/lib64/hw/libSoftGatekeeper.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/libSoftGatekeeper.so
 
 # Keymaster service (Beanpod - MediaTek TEE)
 PRODUCT_COPY_FILES += \
