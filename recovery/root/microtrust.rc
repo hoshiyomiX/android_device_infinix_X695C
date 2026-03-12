@@ -1,6 +1,6 @@
 # Microtrust TEE (Trusted Execution Environment) Configuration
 # Required for FBE Decryption on MediaTek devices with Beanpod Keymaster
-# Based on firmware dump analysis for Infinix X695C
+# Based on official TWRP pattern for MediaTek devices
 
 service teei_daemon /vendor/bin/teei_daemon \
     -r 020b0000000000000000000000000000 \
@@ -25,8 +25,8 @@ service teei_daemon /vendor/bin/teei_daemon \
     -t 7b66512021214487ba710a51d7ea78fe \
     -t 09010000000000000000000000000000
 
-    user system
-    group system
+    user root
+    group root
     disabled
     seclabel u:r:recovery:s0
 
@@ -59,7 +59,10 @@ on post-fs
     restorecon_recursive /vendor/persist
 
 on fs
-    # TEE device permissions
+    # TEE device permissions - standard tee0
+    chmod 0666 /dev/tee0
+    chown system drmrpc /dev/tee0
+    # TEEI client devices
     chmod 0660 /dev/teei_client
     chown system system /dev/teei_client
     chmod 0660 /dev/teei_config
@@ -83,7 +86,10 @@ on fs
     chown system system /dev/emmcrpmb0
     chown system system /dev/utr_tui
     chmod 0660 /dev/utr_tui
-    # Start teei_daemon
+    # Start teei_daemon on fs
+    start teei_daemon
+
+on property:crypto.ready=1
     start teei_daemon
 
 on property:vendor.crypto.fake_encrypt=1 && property:vold.post_fs_data_done=1

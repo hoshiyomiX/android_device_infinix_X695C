@@ -1,6 +1,6 @@
 # Recovery init for Infinix X695C
 # FBE Decryption Support - MediaTek Beanpod Keymaster with Microtrust TEE
-# Based on firmware dump analysis
+# Based on official TWRP pattern for MediaTek devices
 
 # Import Microtrust TEE configuration (required for decryption)
 import /microtrust.rc
@@ -22,6 +22,9 @@ on init
     mkdir /metadata/vold 0771 root system
     mkdir /metadata/vold/metadata_encryption 0771 root system
 
+on fs
+    install_keyring
+
 on fs && property:ro.debuggable=0
     # distinguish USB should connect or not, i.e. CDP vs SDP
     write /sys/class/udc/musb-hdrc/device/cmode 2
@@ -31,7 +34,6 @@ on fs && property:ro.debuggable=0
     mkdir /mnt/vendor/persist 0771 root root
     mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
     # Keyring and crypto setup
-    install_keyring
     setprop crypto.ready 1
 
 on post-fs
@@ -82,6 +84,7 @@ service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-ser
     class hal
     user root
     group root
+    oneshot
     disabled
     seclabel u:r:recovery:s0
 
@@ -91,6 +94,7 @@ service vendor.keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4
     class early_hal
     user root
     group root drmrpc
+    oneshot
     disabled
     seclabel u:r:recovery:s0
 
@@ -99,11 +103,8 @@ on property:hwservicemanager.ready=true
     start vendor.gatekeeper-1-0
 
 on property:crypto.ready=1
+    start teei_daemon
     start vendor.keymaster-4-0-beanpod
-
-on property:vendor.sys.listener.registered=true
-    start vendor.keymaster-4-0-beanpod
-    start vendor.gatekeeper-1-0
 
 on property:ro.crypto.state=unsupported
     stop teei_daemon
@@ -116,6 +117,11 @@ on property:ro.crypto.state=unencrypted
     stop vendor.gatekeeper-1-0
 
 on property:twrp.decrypt.done=true
+    stop teei_daemon
+    stop vendor.keymaster-4-0-beanpod
+    stop vendor.gatekeeper-1-0
+
+on property:crypto.ready=0
     stop teei_daemon
     stop vendor.keymaster-4-0-beanpod
     stop vendor.gatekeeper-1-0
